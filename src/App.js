@@ -42,6 +42,30 @@ function App() {
     }
   }
 
+  function handleDivisionNumber() {
+    if (firstNumber === '0') {
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0');
+      setOperation('/');
+    } else {
+      const sum = Number(firstNumber) / Number(currentNumber);
+      setCurrentNumber(String(sum));
+      setOperation('');
+    }
+  }
+
+  function handleMultiplicationNumber() {
+    if (firstNumber === '0') {
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0');
+      setOperation('*');
+    } else {
+      const sum = Number(firstNumber) * Number(currentNumber);
+      setCurrentNumber(String(sum));
+      setOperation('');
+    }
+  }
+
   function handleEquals() {
     if (firstNumber !== '0' && operation !== '' && currentNumber !== '0') {
       switch (operation) {
@@ -50,6 +74,12 @@ function App() {
           break;
         case '-':
           handleMinusNumber();
+          break;
+        case '/':
+          handleDivisionNumber();
+          break;
+        case '*':
+          handleMultiplicationNumber();
           break;
         default:
           break;
@@ -64,8 +94,8 @@ function App() {
         <Row>
           <Button label="C" />
           <Button label="DEL" onClick={handleOnClear} />
-          <Button label="/" />
-          <Button label="X" />
+          <Button label="/" onClick={handleDivisionNumber} />
+          <Button label="X" onClick={handleMultiplicationNumber} />
         </Row>
         <Row>
           <Button label="9" onClick={() => handleAddNumber('9')} />
